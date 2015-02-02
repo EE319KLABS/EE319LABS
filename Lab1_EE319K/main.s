@@ -13,7 +13,7 @@
 ; The specific operation of this system is to 
 ;   unlock if both switches are pressed
 
-GPIO_PORTE_DATA_R       EQU   0x400243FC
+GPIO_PORTE_DATA_R       EQU   0x400243FC ;agsharhe
 GPIO_PORTE_DIR_R        EQU   0x40024400
 GPIO_PORTE_AFSEL_R      EQU   0x40024420
 GPIO_PORTE_DEN_R        EQU   0x4002451C
