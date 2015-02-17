@@ -25,7 +25,7 @@ ARM Macro Assembler    Page 1
    15 00000000         
    16 00000000 400243FC 
                        GPIO_PORTE_DATA_R
-                               EQU              0x400243FC  ;agsharhe
+                               EQU              0x400243FC
    17 00000000 40024400 
                        GPIO_PORTE_DIR_R
                                EQU              0x40024400

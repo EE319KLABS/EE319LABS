@@ -24,6 +24,7 @@ GPIO_PORTF_DEN_R        EQU   0x4002551C
 GPIO_PORTF_AMSEL_R      EQU   0x40025528
 GPIO_PORTF_PCTL_R       EQU   0x4002552C
 SYSCTL_RCGCGPIO_R       EQU   0x400FE608
+GPIO_PORTF_CR_R			EQU	  0x40025524
 
        AREA    |.text|, CODE, READONLY, ALIGN=2
        THUMB
@@ -42,14 +43,16 @@ ToggleLED			;continues to ToggleLED if switch is pressed
     B loop
 TurnLED_ON
 	LDR R0,[R1];
-	ORR R0,#0x04	
+	ORR R0,#0x04
 	STR R0,[R1];
 	B loop
 delay 	
-	MOV R0,#0xFA0	;1 Cycle
+	MOV R0,#0x0FA0	;1 Cycle
+	MOV R2,#500
+	MUL R0,R2
 wait	
 	SUBS R0,#0x01	;1 Cycle
-	BNE wait		;(1 or 1 + p) [Average 3 Cycles]
+	BNE wait		;(1 or 1 + p) [Average 3 Cycles]  4cycles*X/16000000 = seconds
 	BX LR;
 init
 ;Turn on Port F Clock
@@ -59,32 +62,34 @@ init
 	STR R0,[R1];
 	NOP
 	NOP
+
 ;Set Pin Directions
 	LDR R1, = GPIO_PORTF_DIR_R;
 	LDR R0, [R1];
 	BIC R0,#0x10;
-	ORR R0,#0x04;
+	ORR R0,#0x07;
 	STR R0,[R1];
+
 ;Turn off Alternate Functions
 	LDR R1, = GPIO_PORTF_AFSEL_R;
 	LDR R0, [R1];
-	BIC R0,#0x14;
+	BIC R0,#0x17;
 	STR R0,[R1];
 ;Enable Digital Pins
 	LDR R1, = GPIO_PORTF_DEN_R;
 	LDR R0, [R1];
-	ORR R0,#0x14;
+	ORR R0,#0x17;
 	STR R0,[R1];
 ;PULL UP RESISTOR ENABLED!!!
 	LDR R1, = GPIO_PORTF_PUR_R
 	LDR R0,[R0]
 	ORR R0,#0x10
-	BIC R0,#0x04
+	BIC R0,#0x07
 	STR R0,[R1]
 ;SET PF2 =1 System starts like this
 	LDR R1, = GPIO_PORTF_DATA_R;
 	LDR R0,[R1];
-	ORR R0,#0x04;
+	MOV R0,#0x04
 	STR R0,[R1];
 	BX LR
 	
