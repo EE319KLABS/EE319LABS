@@ -34,15 +34,15 @@ loop
 	BL delay
 	LDR R0,[R1];
 	ANDS R0,#0x10 ;ANDS is needed to set NPVC flags
-	BNE TurnLED_ON
-ToggleLED
+	BNE TurnLED_ON	;Branches to TurnLED_ON if switch is not pressed
+ToggleLED			;continues to ToggleLED if switch is pressed
 	LDR R0,[R1]
-	EOR R0,#0x04
+	EOR R0,#0x04	;Exclusive OR will toggle LED in DATA every time it executes
 	STR R0,[R1]
     B loop
 TurnLED_ON
 	LDR R0,[R1];
-	ORR R0,#0x04
+	ORR R0,#0x04	
 	STR R0,[R1];
 	B loop
 delay 	
@@ -79,6 +79,7 @@ init
 	LDR R1, = GPIO_PORTF_PUR_R
 	LDR R0,[R0]
 	ORR R0,#0x10
+	BIC R0,#0x04
 	STR R0,[R1]
 ;SET PF2 =1 System starts like this
 	LDR R1, = GPIO_PORTF_DATA_R;
