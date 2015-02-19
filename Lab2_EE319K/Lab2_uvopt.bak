@@ -210,7 +210,11 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
+<<<<<<< HEAD
+      <TopLine>275</TopLine>
+=======
       <TopLine>276</TopLine>
+>>>>>>> 30b3843e81dbddfe8b399c0ba9973fd4c7558387
       <CurrentLine>277</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\Startup.s</PathWithFileName>
@@ -225,15 +229,15 @@
       <tvExp>0</tvExp>
       <Focus>0</Focus>
 <<<<<<< HEAD
-      <ColumnNumber>0</ColumnNumber>
+      <ColumnNumber>17</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>49</TopLine>
-      <CurrentLine>52</CurrentLine>
+      <TopLine>34</TopLine>
+      <CurrentLine>87</CurrentLine>
 =======
-      <ColumnNumber>27</ColumnNumber>
+      <ColumnNumber>9</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>4</CurrentLine>
+      <TopLine>73</TopLine>
+      <CurrentLine>94</CurrentLine>
 >>>>>>> 30b3843e81dbddfe8b399c0ba9973fd4c7558387
       <bDave2>0</bDave2>
       <PathWithFileName>.\main.s</PathWithFileName>

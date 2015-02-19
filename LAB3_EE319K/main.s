@@ -38,17 +38,58 @@ Start
  ; TExaS_Init sets bus clock at 80 MHz
       BL  TExaS_Init ; voltmeter, scope on PD3
 ; you initialize PE1 PE0
-
+	BL init
+; R0 now contains DATA address
 
       CPSIE  I    ; TExaS voltmeter, scope runs on interrupts
+;CPSIE I enables interrupts
 
 loop  
 ; you input output delay
-      B    loop
-
-
-
-
+	BL delay
+	  
+	  B    loop
+delay
+;LED should be slowed to 8Hz
+;16MHz/8Hz= 2E6 (total clock cycles)
+;approx 4 cycles per wait loop
+;2E6/4= 500000 = 0x7A120 or 4000 x 125, 4000=0xFA0
+	MOV R0, #0x0FA0
+	MOV R2, #125
+	MUL R0, R0, R2
+wait
+	SUBS R0, #0x01 ;1 cycle
+	BNE wait ;average 3 cycles
+	BX LR
+init
+; Turn on Port E clock
+	LDR R1, = SYSCTL_RCGCGPIO_R
+	LDR R0, [R1]
+	ORR R0, #0x10
+	STR R0, [R1]
+	NOP
+	NOP
+; Enable Digital Pins
+	LDR R1, = GPIO_PORTE_DEN_R
+	LDR R0, [R1]
+	ORR R0, #0x03
+	STR R0, [R1]
+; Disable Analog 
+	LDR R1, = GPIO_PORTE_AMSEL_R
+	LDR R0, [R1]
+	BIC R0, #0x03
+	STR R0, [R1]
+; Disable Alternate Functions
+	LDR R1, = GPIO_PORTE_AFSEL_R
+	LDR R0, [R1]
+	BIC R0, #0x03
+	STR R0, [R1]
+; Set Data Register so that LED is on
+	LDR R1, = GPIO_PORTE_DATA_R
+	LDR R0, [R1]
+	ORR R0, #0x02
+	STR R0, [R1]
+	BX LR
       ALIGN      ; make sure the end of this section is aligned
       END        ; end of file
        

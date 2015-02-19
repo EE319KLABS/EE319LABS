@@ -47,19 +47,19 @@ TurnLED_ON
 	STR R0,[R1];
 	B loop
 delay 	
-<<<<<<< HEAD
+;<<<<<<< HEAD
 	MOV R0,#0xFA0	;1 Cycle, 0xFA0 is approximately 1ms
 wait	
 	SUBS R0,#0x01	;1 Cycle, counts down
 	BNE wait		;(1 or 1 + p) [Average 3 Cycles]
 =======
-	MOV R0,#0x0FA0	;1 Cycle
-	MOV R2,#500
-	MUL R0,R2
-wait	
-	SUBS R0,#0x01	;1 Cycle
-	BNE wait		;(1 or 1 + p) [Average 3 Cycles]  4cycles*X/16000000 = seconds
->>>>>>> 30b3843e81dbddfe8b399c0ba9973fd4c7558387
+;	MOV R0,#0x0FA0	;1 Cycle
+;	MOV R2,#500
+;	MUL R0,R2
+;wait	
+	;SUBS R0,#0x01	;1 Cycle
+	;BNE wait		;(1 or 1 + p) [Average 3 Cycles]  4cycles*X/16000000 = seconds
+;>>>>>>> 30b3843e81dbddfe8b399c0ba9973fd4c7558387
 	BX LR;
 init
 ;Turn on Port F Clock
