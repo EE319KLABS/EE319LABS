@@ -39,7 +39,7 @@ Start
       BL  TExaS_Init ; voltmeter, scope on PD3
 ; you initialize PE1 PE0
 	BL init
-; R0 now contains DATA address
+; R1 now contains DATA_R address,don't mess with it
 
       CPSIE  I    ; TExaS voltmeter, scope runs on interrupts
 ;CPSIE I enables interrupts
@@ -47,8 +47,21 @@ Start
 loop  
 ; you input output delay
 	BL delay
-	  
-	  B    loop
+	LDR R0, [R1] ;R1 still contains DATA_R address  
+	ANDS R0, #0x01
+	BNE ToggleLED
+TurnLED_ON
+	LDR R0, [R1]
+	ORR R0, #0x02
+	STR R0, [R1]
+	B loop
+ToggleLED	
+	LDR R0, [R1]
+	EOR R0, #0x02
+	STR R0, [R1]
+	B loop
+	
+	
 delay
 ;LED should be slowed to 8Hz
 ;16MHz/8Hz= 2E6 (total clock cycles)
@@ -69,6 +82,12 @@ init
 	STR R0, [R1]
 	NOP
 	NOP
+;Set Pin Directions
+	LDR R1, = GPIO_PORTE_DIR_R
+	LDR R0, [R1];
+	BIC R0, #0x01
+	ORR R0, #0x02
+	STR R0, [R1]
 ; Enable Digital Pins
 	LDR R1, = GPIO_PORTE_DEN_R
 	LDR R0, [R1]
