@@ -69,10 +69,17 @@ ARM Macro Assembler    Page 1
 ARM Macro Assembler    Page 2 
 
 
-   37 0000000E D104            BNE              TurnLED_ON
-   38 00000010         ToggleLED
+   37 0000000E D104            BNE              TurnLED_ON  ;Branches to TurnLE
+                                                            D_ON if switch is n
+                                                            ot pressed
+   38 00000010         ToggleLED                            ;continues to Toggl
+                                                            eLED if switch is p
+                                                            ressed
    39 00000010 6808            LDR              R0,[R1]
-   40 00000012 F080 0004       EOR              R0,#0x04
+   40 00000012 F080 0004       EOR              R0,#0x04    ;Exclusive OR will 
+                                                            toggle LED in DATA 
+                                                            every time it execu
+                                                            tes
    41 00000016 6008            STR              R0,[R1]
    42 00000018 E7F4            B                loop
    43 0000001A         TurnLED_ON
@@ -81,9 +88,11 @@ ARM Macro Assembler    Page 2
    46 00000020 6008            STR              R0,[R1]     ;
    47 00000022 E7EF            B                loop
    48 00000024         delay
-   49 00000024 F44F 607A       MOV              R0,#0xFA0   ;1 Cycle
+   49 00000024 F44F 607A       MOV              R0,#0xFA0   ;1 Cycle, 0xFA0 is 
+                                                            approximately 1ms
    50 00000028         wait
-   51 00000028 3801            SUBS             R0,#0x01    ;1 Cycle
+   51 00000028 3801            SUBS             R0,#0x01    ;1 Cycle, counts do
+                                                            wn
    52 0000002A D1FD            BNE              wait        ;(1 or 1 + p) [Aver
                                                             age 3 Cycles]
    53 0000002C 4770            BX               LR          ;
@@ -119,6 +128,12 @@ ARM Macro Assembler    Page 2
    83 0000006A 6008            STR              R0,[R1]
    84 0000006C         ;SET PF2 =1 System starts like this
    85 0000006C 4907            LDR              R1, = GPIO_PORTF_DATA_R ;
+
+
+
+ARM Macro Assembler    Page 3 
+
+
    86 0000006E 6808            LDR              R0,[R1]     ;
    87 00000070 F040 0004       ORR              R0,#0x04    ;
    88 00000074 6008            STR              R0,[R1]     ;
@@ -128,12 +143,6 @@ ARM Macro Assembler    Page 2
                                                              of this section is
                                                              aligned
    92 00000078                 END                          ; end of file
-
-
-
-ARM Macro Assembler    Page 3 
-
-
               400FE608 
               40025400 
               40025420 

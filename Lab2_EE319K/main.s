@@ -46,9 +46,9 @@ TurnLED_ON
 	STR R0,[R1];
 	B loop
 delay 	
-	MOV R0,#0xFA0	;1 Cycle
+	MOV R0,#0xFA0	;1 Cycle, 0xFA0 is approximately 1ms
 wait	
-	SUBS R0,#0x01	;1 Cycle
+	SUBS R0,#0x01	;1 Cycle, counts down
 	BNE wait		;(1 or 1 + p) [Average 3 Cycles]
 	BX LR;
 init

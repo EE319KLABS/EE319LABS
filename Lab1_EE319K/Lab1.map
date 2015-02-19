@@ -201,11 +201,11 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       108         20          0          0          0        204   main.o
-       644        620          0          0       1024        696   startup.o
+       108         20          0          0          0        208   main.o
+       644        620          0          0       1024        700   startup.o
 
     ----------------------------------------------------------------------
-       752        640          0          0       1024        900   Object Totals
+       752        640          0          0       1024        908   Object Totals
          0          0          0          0          0          0   (incl. Generated)
          0          0          0          0          0          0   (incl. Padding)
 
@@ -220,8 +220,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-       752        640          0          0       1024        900   Grand Totals
-       752        640          0          0       1024        900   ELF Image Totals
+       752        640          0          0       1024        908   Grand Totals
+       752        640          0          0       1024        908   ELF Image Totals
        752        640          0          0          0          0   ROM Totals
 
 ==============================================================================
