@@ -30,7 +30,7 @@ Start
 	;PE3 = input switch = 1 notpress, 0 pressed
 	;PE4 = input switch = 1 notpress, 0 pressed
 	;PE2 = 1 if and only if PE3 = 0 && PE4 = 0
-;Turn on Port E Clock and wait 2 clock cycles
+;Turn on Port E Clock and wait 2 clock cycle s
 	LDR R1,= SYSCTL_RCGCGPIO_R
 	LDR R0,[R1]
 	ORR R0,R0,#0x10
